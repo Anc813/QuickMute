@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace MicPrep.Properties
+namespace Leo.Properties
 {
 
 

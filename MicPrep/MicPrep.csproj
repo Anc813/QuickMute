@@ -103,5 +103,12 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\IconDisabledICO.ico" />
+    <Resource Include="Assets\IconEnabledICO.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\CombinedICO.ico" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

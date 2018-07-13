@@ -1,5 +1,6 @@
 ﻿using AudioSwitcher.AudioApi;
 using AudioSwitcher.AudioApi.CoreAudio;
+using Hardcodet.Wpf.TaskbarNotification;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,20 +23,38 @@ namespace MicPrep
     /// </summary>
     public partial class MainWindow : Window
     {
+        public CoreAudioController AudioController = new CoreAudioController();
+        public Boolean MicMuted;
+
         public MainWindow()
         {
             InitializeComponent();
+            this.WindowState = System.Windows.WindowState.Minimized;
+            //this.Hide();
+
+            this.DataContext = MicMuted;
         }
 
-        private async void MuteBtn_Click(object sender, RoutedEventArgs e)
+        private async void UpdateMuteStatus()
         {
-            CoreAudioController AudioController = new CoreAudioController();
             var devices = await AudioController.GetDevicesAsync(DeviceType.Capture, DeviceState.Active);
+            var device = devices.FirstOrDefault(x => x.IsDefaultDevice);
+
+            if (device != null)
+            {
+                this.MicMuted = device.IsMuted;
+            }
+        }
+
+        private async void MuteToggle_Click(object sender, RoutedEventArgs e)
+        {
+            var devices = await this.AudioController.GetDevicesAsync(DeviceType.Capture, DeviceState.Active);
             var device = devices.FirstOrDefault(x => x.IsDefaultDevice);
 
             if(device != null)
             {
-                await device.MuteAsync(!device.IsMuted);
+                await device.ToggleMuteAsync();
+                UpdateMuteStatus();
             }
         }
     }
