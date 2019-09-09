@@ -14,11 +14,13 @@
                         Visibility="Visible"
                         ToolTipText="Fallback Text"
                         MenuActivation="RightClick"
-                        IconSource="Assets/CombinedICO.ico"
-                        PopupActivation="DoubleClick">
+                        PopupActivation="DoubleClick"
+                        TrayLeftMouseUp="MuteToggle_Click"
+                        >
             <tb:TaskbarIcon.ContextMenu>
                 <ContextMenu>
-                    <MenuItem x:Name="UnmuteMicTrayContext" Click="MuteToggle_Click" Header="Toggle Mute" IsCheckable="True" IsChecked="{Binding MicMuted}"/>
+                    <!-- <MenuItem x:Name="UnmuteMicTrayContext" Click="MuteToggle_Click" Header="Toggle Mute" IsCheckable="True" IsChecked="{Binding MicMuted}"/> -->
+                    <MenuItem x:Name="ExitApp" Click="ExitApp_Click" Header="Exit" IsCheckable="False"/>
                 </ContextMenu>
             </tb:TaskbarIcon.ContextMenu>
         </tb:TaskbarIcon>
