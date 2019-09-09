@@ -32,7 +32,6 @@ namespace MicPrep
         public MainWindow()
         {
             InitializeComponent();
-            this.Subscribe();
 
             this.WindowState = System.Windows.WindowState.Minimized;
             this.Hide();
@@ -68,29 +67,6 @@ namespace MicPrep
         private void ExitApp_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
-        }
-
-        // shortcut https://tyrrrz.me/Blog/WndProc-in-WPF
-        public HwndSource source;
-
-        private void Subscribe()
-        {
-            //var source = HwndSource.FromHwnd(new WindowInteropHelper(this).EnsureHandle());
-
-            //source.AddHook(WndProc);
-        }
-        private IntPtr WndProc(IntPtr hwnd, int msg, IntPtr wParam, IntPtr lParam, ref bool handled)
-        {
-            // Handle messages...
-            Console.WriteLine(msg);
-            return IntPtr.Zero;
-        }
-
-        protected override void OnClosing(CancelEventArgs e)
-        {
-            base.OnClosing(e);
-            //source.RemoveHook(WndProc);
-            //source.Dispose();
         }
     }
 }
